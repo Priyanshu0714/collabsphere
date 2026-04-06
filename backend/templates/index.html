@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Live Chat</title>
+    </head>
+    <body>
+        <h2>{{.username}}</h2>
+        <a href="/logout">Logout</a>
+        <label for="msg">Message:</label>
+        <input type="text" name="msg" id="msg" />
+        <button onclick="sendMsg()">Send</button>
+
+        <div id="chat"></div>
+    </body>
+
+    <script>
+        let ws = new WebSocket("ws://" + location.host + "/ws");
+
+        ws.onmessage = (e) => {
+            let chat = document.getElementById("chat");
+            chat.innerHTML += "<div>" + e.data + "</div>";
+        };
+
+        function sendMsg() {
+            let input = document.getElementById("msg");
+            ws.send(input.value);
+            input.value = "";
+        }
+    </script>
+</html>
