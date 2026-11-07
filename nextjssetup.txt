@@ -1,0 +1,6 @@
+1. yarn create next-app@latest filename --yes
+2. yarn config set nodeLinker node-modules
+3. rm -f .pnp.* yarn.lock
+    rm -rf node_modules
+4. yarn install
+5. yarn dev
